@@ -1,12 +1,10 @@
 import { useEffect } from "react";
 import { View, Text, Pressable, Dimensions } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { authClient } from "@/lib/auth-client";
 import { useThemeColor } from "heroui-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Container } from "@/components/container";
-import { Header } from "@/components/header";
 
 const { width } = Dimensions.get("window");
 
@@ -36,7 +34,7 @@ export default function LandingPage() {
   }
 
   if (!session) {
-    return null; // Redirect is in progress
+    return null;
   }
 
   return (
