@@ -11,33 +11,35 @@ import { AppThemeProvider } from "@/contexts/app-theme-context";
 import { queryClient } from "@/utils/orpc";
 
 export const unstable_settings = {
-	initialRouteName: "(drawer)",
+  initialRouteName: "index",
 };
 
 function StackLayout() {
-	return (
-		<Stack screenOptions={{}}>
-			<Stack.Screen name="(drawer)" options={{ headerShown: false }} />
-			<Stack.Screen
-				name="modal"
-				options={{ title: "Modal", presentation: "modal" }}
-			/>
-		</Stack>
-	);
+  return (
+    <Stack screenOptions={{}}>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="modal"
+        options={{ title: "Modal", presentation: "modal" }}
+      />
+    </Stack>
+  );
 }
 
 export default function Layout() {
-	return (
-		<QueryClientProvider client={queryClient}>
-			<GestureHandlerRootView style={{ flex: 1 }}>
-				<KeyboardProvider>
-					<AppThemeProvider>
-						<HeroUINativeProvider>
-							<StackLayout />
-						</HeroUINativeProvider>
-					</AppThemeProvider>
-				</KeyboardProvider>
-			</GestureHandlerRootView>
-		</QueryClientProvider>
-	);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <KeyboardProvider>
+          <AppThemeProvider>
+            <HeroUINativeProvider>
+              <StackLayout />
+            </HeroUINativeProvider>
+          </AppThemeProvider>
+        </KeyboardProvider>
+      </GestureHandlerRootView>
+    </QueryClientProvider>
+  );
 }
