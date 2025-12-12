@@ -1,0 +1,17 @@
+{
+	"expo": {
+		"scheme": "native-wind-tanstack-orpc-template",
+		"userInterfaceStyle": "automatic",
+		"orientation": "default",
+		"web": {
+			"bundler": "metro"
+		},
+		"name": "native-wind-tanstack-orpc-template",
+		"slug": "native-wind-tanstack-orpc-template",
+		"plugins": ["expo-font"],
+		"experiments": {
+			"typedRoutes": true,
+			"reactCompiler": true
+		}
+	}
+}

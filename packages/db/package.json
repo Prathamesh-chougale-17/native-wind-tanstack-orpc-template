@@ -1,0 +1,24 @@
+{
+  "name": "@native-wind-tanstack-orpc-template/db",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "devDependencies": {
+    "@native-wind-tanstack-orpc-template/config": "workspace:*"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "mongoose": "^8.14.0",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  }
+}
