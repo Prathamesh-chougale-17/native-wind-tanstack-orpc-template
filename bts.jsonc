@@ -1,8 +1,8 @@
-// Better-T-Stack configuration file
+// native-hero-template configuration file
 // safe to delete
 
 {
-  "$schema": "https://r2.better-t-stack.dev/schema.json",
+  "$schema": "https://r2.native-hero-template.dev/schema.json",
   "version": "3.7.4",
   "createdAt": "2025-12-12T09:43:32.209Z",
   "database": "mongodb",
