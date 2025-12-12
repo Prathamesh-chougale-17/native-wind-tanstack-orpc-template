@@ -34,7 +34,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <Container>
+    <Container showHeader={true}>
       <View className="flex-1 bg-background px-2">
         {/* Profile Avatar Section */}
         <View className="items-center mt-4 mb-8">

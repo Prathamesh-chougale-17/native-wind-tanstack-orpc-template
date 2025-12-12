@@ -9,10 +9,12 @@ const AnimatedView = Animated.createAnimatedComponent(View);
 
 type Props = AnimatedProps<ViewProps> & {
   className?: string;
+  showHeader?: boolean;
 };
 
 export function Container({
   children,
+  showHeader = false,
   className,
   ...props
 }: PropsWithChildren<Props>) {
@@ -29,8 +31,7 @@ export function Container({
       }}
       {...props}
     >
-      <Header />
-
+      {showHeader && <Header />}
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         {children}
       </ScrollView>

@@ -40,7 +40,7 @@ export default function LandingPage() {
   }
 
   return (
-    <Container>
+    <Container showHeader={true}>
       {/* Header */}
       <View className="mt-2 mb-6 px-2">
         <View className="flex-row items-center justify-between mb-8">
