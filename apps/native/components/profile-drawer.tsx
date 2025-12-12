@@ -150,14 +150,17 @@ export function ProfileDrawer({ visible, onClose }: ProfileDrawerProps) {
               </Pressable>
 
               {/* Theme Selection */}
-              <View className="px-6 py-4 border-t border-divider">
-                <View className="flex-row items-center gap-3 mb-4">
+              <View className="px-6 py-4 border-t border-divider flex-row items-center gap-4 active:bg-surface/80">
+                <View className="flex-row items-center gap-3 flex-1">
                   <View className="w-10 h-10 bg-purple-500/20 rounded-lg items-center justify-center">
                     <Ionicons name="moon" size={20} color="#a855f7" />
                   </View>
-                  <Text className="text-base font-semibold text-foreground">
-                    Theme
-                  </Text>
+                  <View className="flex-1">
+                    <Text className="text-base font-semibold text-foreground">
+                      Theme
+                    </Text>
+                    <Text className="text-xs text-muted">Light / Dark</Text>
+                  </View>
                 </View>
                 <ThemeToggle />
               </View>
