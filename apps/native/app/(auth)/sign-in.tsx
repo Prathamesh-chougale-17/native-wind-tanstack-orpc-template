@@ -25,7 +25,7 @@ export default function SignInScreen() {
   const dangerColor = useThemeColor("danger");
   const backgroundColor = useThemeColor("background");
 
-  // TanStack Query Mutation
+  // Mutation for login
   const signInMutation = useMutation({
     mutationFn: async (credentials: { email: string; password: string }) => {
       return new Promise((resolve, reject) => {
@@ -43,15 +43,12 @@ export default function SignInScreen() {
       setEmail("");
       setPassword("");
       queryClient.refetchQueries();
-      router.push("/");
+      router.replace("/"); // go to home
     },
   });
 
-  async function handleLogin() {
-    if (!email || !password) {
-      return;
-    }
-
+  function handleLogin() {
+    if (!email || !password) return;
     signInMutation.mutate({ email, password });
   }
 
@@ -63,9 +60,11 @@ export default function SignInScreen() {
           <View className="w-20 h-20 bg-accent rounded-2xl items-center justify-center mb-4">
             <Ionicons name="lock-closed" size={40} color={backgroundColor} />
           </View>
+
           <Text className="text-3xl font-bold text-foreground mb-2">
             Welcome Back
           </Text>
+
           <Text className="text-muted text-center text-base">
             Sign in to continue to your account
           </Text>
@@ -74,7 +73,7 @@ export default function SignInScreen() {
 
       {/* Form */}
       <View className="flex-1">
-        {/* Error Message */}
+        {/* Error */}
         {signInMutation.isError && (
           <View className="mb-4 p-4 bg-danger/10 rounded-xl border border-danger/20 flex-row items-center">
             <Ionicons name="alert-circle" size={20} color={dangerColor} />
@@ -86,9 +85,10 @@ export default function SignInScreen() {
           </View>
         )}
 
-        {/* Email Input */}
+        {/* Email */}
         <View className="mb-5">
           <Text className="text-foreground font-semibold mb-2 ml-1">Email</Text>
+
           <View className="bg-surface border border-divider rounded-xl px-4 py-1 flex-row items-center">
             <Ionicons
               name="mail-outline"
@@ -96,6 +96,7 @@ export default function SignInScreen() {
               color={mutedColor}
               style={{ marginRight: 8 }}
             />
+
             <TextInput
               className="flex-1 text-foreground py-4"
               placeholder="you@example.com"
@@ -112,11 +113,12 @@ export default function SignInScreen() {
           </View>
         </View>
 
-        {/* Password Input */}
+        {/* Password */}
         <View className="mb-6">
           <Text className="text-foreground font-semibold mb-2 ml-1">
             Password
           </Text>
+
           <View className="bg-surface border border-divider rounded-xl px-4 py-1 flex-row items-center">
             <Ionicons
               name="key-outline"
@@ -124,6 +126,7 @@ export default function SignInScreen() {
               color={mutedColor}
               style={{ marginRight: 8 }}
             />
+
             <TextInput
               className="flex-1 text-foreground py-4"
               placeholder="••••••••"
@@ -136,6 +139,7 @@ export default function SignInScreen() {
               secureTextEntry={!showPassword}
               editable={!signInMutation.isPending}
             />
+
             <Pressable
               onPress={() => setShowPassword(!showPassword)}
               hitSlop={8}
@@ -149,7 +153,7 @@ export default function SignInScreen() {
           </View>
         </View>
 
-        {/* Forgot Password Link */}
+        {/* Forgot Password */}
         <Pressable className="mb-8 active:opacity-70">
           <Text className="text-accent font-semibold text-center">
             Forgot Password?
@@ -186,13 +190,14 @@ export default function SignInScreen() {
           <View className="flex-1 h-px bg-divider" />
         </View>
 
-        {/* Social Login Buttons */}
+        {/* Social Login */}
         <View className="flex-row gap-3 mb-6">
           <Pressable className="flex-1 border border-divider rounded-xl py-3 active:bg-surface">
             <View className="items-center">
               <Ionicons name="logo-google" size={24} color={foregroundColor} />
             </View>
           </Pressable>
+
           <Pressable className="flex-1 border border-divider rounded-xl py-3 active:bg-surface">
             <View className="items-center">
               <Ionicons name="logo-apple" size={24} color={foregroundColor} />
@@ -204,6 +209,7 @@ export default function SignInScreen() {
       {/* Footer */}
       <View className="flex-row items-center justify-center mb-8">
         <Text className="text-muted">Don't have an account? </Text>
+
         <Link href="/(auth)/sign-up" asChild>
           <Pressable className="active:opacity-70">
             <Text className="text-accent font-bold">Sign Up</Text>

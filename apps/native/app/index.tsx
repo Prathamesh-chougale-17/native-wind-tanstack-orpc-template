@@ -21,9 +21,9 @@ export default function LandingPage() {
   const successColor = useThemeColor("success");
 
   useEffect(() => {
-    // Redirect unauthenticated users to sign up
+    // Redirect unauthenticated users to sign in
     if (!isPending && !session) {
-      router.replace("/(auth)/sign-up");
+      router.replace("/(auth)/sign-in");
     }
   }, [session, isPending, router]);
 

@@ -44,7 +44,7 @@ export function ProfileDrawer({ visible, onClose }: ProfileDrawerProps) {
   const handleSignOut = async () => {
     setSignOutConfirm(false);
     await authClient.signOut();
-    router.replace("/(auth)/sign-up");
+    router.replace("/(auth)/sign-in");
   };
 
   const handleViewProfile = () => {

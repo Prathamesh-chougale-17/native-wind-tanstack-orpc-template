@@ -7,14 +7,13 @@ export default function AuthLayout() {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
 
+  // redirect if already logged in
   useEffect(() => {
-    // Redirect authenticated users to home
     if (!isPending && session) {
       router.replace("/");
     }
-  }, [session, isPending, router]);
+  }, [session, isPending]);
 
-  // Show loading state while checking auth
   if (isPending) {
     return (
       <View className="flex-1 bg-background items-center justify-center">
@@ -24,11 +23,7 @@ export default function AuthLayout() {
   }
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
+    <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="sign-in" />
       <Stack.Screen name="sign-up" />
     </Stack>
