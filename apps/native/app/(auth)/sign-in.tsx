@@ -197,7 +197,6 @@ export default function SignInScreen() {
               <Ionicons name="logo-google" size={24} color={foregroundColor} />
             </View>
           </Pressable>
-
           <Pressable className="flex-1 border border-divider rounded-xl py-3 active:bg-surface">
             <View className="items-center">
               <Ionicons name="logo-apple" size={24} color={foregroundColor} />
@@ -209,7 +208,6 @@ export default function SignInScreen() {
       {/* Footer */}
       <View className="flex-row items-center justify-center mb-8">
         <Text className="text-muted">Don't have an account? </Text>
-
         <Link href="/(auth)/sign-up" asChild>
           <Pressable className="active:opacity-70">
             <Text className="text-accent font-bold">Sign Up</Text>
