@@ -59,7 +59,7 @@ export default function SignUpScreen() {
       setPassword("");
       setConfirmPassword("");
       queryClient.refetchQueries();
-      router.push("/(drawer)");
+      router.push("/");
     },
   });
 

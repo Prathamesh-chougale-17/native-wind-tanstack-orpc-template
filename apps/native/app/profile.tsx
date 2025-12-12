@@ -34,24 +34,10 @@ export default function ProfilePage() {
   };
 
   return (
-    <View className="flex-1 bg-background">
-      {/* Header */}
-      <View className="bg-surface border-b border-divider px-6 pt-4 pb-4">
-        <View className="flex-row items-center justify-between">
-          <Pressable
-            onPress={handleBack}
-            className="w-10 h-10 rounded-lg bg-background/50 items-center justify-center active:opacity-70"
-          >
-            <Ionicons name="arrow-back" size={24} color={foregroundColor} />
-          </Pressable>
-          <Text className="text-xl font-bold text-foreground">My Profile</Text>
-          <View className="w-10" />
-        </View>
-      </View>
-
-      <Container className="p-6">
+    <Container>
+      <View className="flex-1 bg-background px-2">
         {/* Profile Avatar Section */}
-        <View className="items-center mb-8">
+        <View className="items-center mt-4 mb-8">
           <View className="w-24 h-24 bg-linear-to-br from-accent to-accent/60 rounded-2xl items-center justify-center mb-4 shadow-lg">
             <Text className="text-4xl font-bold text-background">
               {getInitials(session?.user?.name)}
@@ -235,7 +221,7 @@ export default function ProfilePage() {
             Last updated: {new Date().toLocaleDateString()}
           </Text>
         </View>
-      </Container>
-    </View>
+      </View>
+    </Container>
   );
 }

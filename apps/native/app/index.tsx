@@ -40,9 +40,9 @@ export default function LandingPage() {
   }
 
   return (
-    <Container className="p-2">
+    <Container>
       {/* Header */}
-      <View className="mt-8 mb-12">
+      <View className="mt-2 mb-6 px-2">
         <View className="flex-row items-center justify-between mb-8">
           <View>
             <Text className="text-4xl font-bold text-foreground">Welcome</Text>
@@ -62,7 +62,7 @@ export default function LandingPage() {
       </View>
 
       {/* Hero Card */}
-      <View className="bg-linear-to-br from-accent/20 to-accent/5 rounded-3xl p-6 mb-12 border border-accent/20">
+      <View className="bg-linear-to-br px-2 from-accent/20 to-accent/5 rounded-3xl p-6 mb-6 border border-accent/20">
         <View className="flex-row items-start gap-4">
           <View className="w-12 h-12 bg-accent/30 rounded-xl items-center justify-center">
             <Ionicons name="rocket" size={24} color={accentColor} />
@@ -79,7 +79,7 @@ export default function LandingPage() {
       </View>
 
       {/* Features Grid */}
-      <View className="mb-12">
+      <View className="mb-6 px-2">
         <Text className="text-2xl font-bold text-foreground mb-6">
           Features
         </Text>
@@ -150,7 +150,7 @@ export default function LandingPage() {
       </View>
 
       {/* Stats Section */}
-      <View className="mb-12">
+      <View className="mb-6 px-2">
         <Text className="text-2xl font-bold text-foreground mb-6">
           By The Numbers
         </Text>
@@ -174,7 +174,7 @@ export default function LandingPage() {
       </View>
 
       {/* CTA Section */}
-      <View className="mb-12">
+      <View className="mb-6 px-2">
         <View className="bg-accent/10 rounded-2xl p-6 border border-accent/20">
           <View className="items-center mb-6">
             <Ionicons name="star" size={40} color={accentColor} />

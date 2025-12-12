@@ -47,7 +47,7 @@ export default function SignInScreen() {
       setEmail("");
       setPassword("");
       queryClient.refetchQueries();
-      router.push("/(drawer)");
+      router.push("/");
     },
   });
 
