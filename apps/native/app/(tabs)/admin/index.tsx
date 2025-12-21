@@ -4,7 +4,7 @@ import { useThemeColor } from "heroui-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Container } from "@/components/container";
 import { authClient } from "@/lib/auth-client";
-import { orpcClient } from "@/utils/orpc";
+import { client as orpcClient } from "@/utils/orpc";
 import { useQuery } from "@tanstack/react-query";
 
 export default function AdminTab() {
@@ -126,7 +126,7 @@ export default function AdminTab() {
           <View className="gap-3">
             {/* Organization Management */}
             <Pressable
-              onPress={() => router.push("/(tabs)/admin/organizations")}
+              onPress={() => router.push("/(tabs)/admin/organizations" as any)}
               className="bg-surface rounded-2xl p-5 border border-divider active:opacity-70"
             >
               <View className="flex-row items-center mb-3">
@@ -152,7 +152,7 @@ export default function AdminTab() {
 
             {/* User Management */}
             <Pressable
-              onPress={() => router.push("/(tabs)/admin/users")}
+              onPress={() => router.push("/(tabs)/admin/users" as any)}
               className="bg-surface rounded-2xl p-5 border border-divider active:opacity-70"
             >
               <View className="flex-row items-center mb-3">
@@ -186,7 +186,7 @@ export default function AdminTab() {
 
           <View className="gap-3">
             <Pressable
-              onPress={() => router.push("/(tabs)/admin/organizations/create")}
+              onPress={() => router.push("/(tabs)/admin/organizations/create" as any)}
               className="bg-accent/10 rounded-2xl p-4 border border-accent/20 flex-row items-center active:opacity-70"
             >
               <View className="w-12 h-12 bg-accent/20 rounded-xl items-center justify-center mr-3">

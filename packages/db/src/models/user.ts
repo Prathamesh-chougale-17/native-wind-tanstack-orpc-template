@@ -12,16 +12,16 @@ export interface UserWithRole {
 	emailVerified: boolean;
 }
 
-export const usersCollection = client.collection("user");
-
 // Helper functions for user operations
 export const userHelpers = {
-	async getUserById(userId: string) {
-		return usersCollection.findOne({ id: userId });
+	async getUserById(userId: string): Promise<any> {
+		const collection = client.collection("user");
+		return collection.findOne({ id: userId });
 	},
 
-	async updateUserRole(userId: string, role: UserRole) {
-		const result = await usersCollection.updateOne(
+	async updateUserRole(userId: string, role: UserRole): Promise<boolean> {
+		const collection = client.collection("user");
+		const result = await collection.updateOne(
 			{ id: userId },
 			{
 				$set: {
@@ -33,8 +33,9 @@ export const userHelpers = {
 		return result.modifiedCount > 0;
 	},
 
-	async assignUserToOrganization(userId: string, organizationId: string) {
-		const result = await usersCollection.updateOne(
+	async assignUserToOrganization(userId: string, organizationId: string): Promise<boolean> {
+		const collection = client.collection("user");
+		const result = await collection.updateOne(
 			{ id: userId },
 			{
 				$set: {
@@ -46,8 +47,9 @@ export const userHelpers = {
 		return result.modifiedCount > 0;
 	},
 
-	async removeUserFromOrganization(userId: string) {
-		const result = await usersCollection.updateOne(
+	async removeUserFromOrganization(userId: string): Promise<boolean> {
+		const collection = client.collection("user");
+		const result = await collection.updateOne(
 			{ id: userId },
 			{
 				$set: {
@@ -59,19 +61,23 @@ export const userHelpers = {
 		return result.modifiedCount > 0;
 	},
 
-	async getAllUsers() {
-		return usersCollection.find({}).toArray();
+	async getAllUsers(): Promise<any[]> {
+		const collection = client.collection("user");
+		return collection.find({}).toArray();
 	},
 
-	async getUsersByRole(role: UserRole) {
-		return usersCollection.find({ role }).toArray();
+	async getUsersByRole(role: UserRole): Promise<any[]> {
+		const collection = client.collection("user");
+		return collection.find({ role }).toArray();
 	},
 
-	async getUsersByOrganization(organizationId: string) {
-		return usersCollection.find({ organizationId }).toArray();
+	async getUsersByOrganization(organizationId: string): Promise<any[]> {
+		const collection = client.collection("user");
+		return collection.find({ organizationId }).toArray();
 	},
 
-	async updateUserWithRoleAndOrg(userId: string, role: UserRole, organizationId?: string) {
+	async updateUserWithRoleAndOrg(userId: string, role: UserRole, organizationId?: string): Promise<boolean> {
+		const collection = client.collection("user");
 		const updateData: any = {
 			role,
 			updatedAt: new Date(),
@@ -81,7 +87,7 @@ export const userHelpers = {
 			updateData.organizationId = organizationId;
 		}
 
-		const result = await usersCollection.updateOne(
+		const result = await collection.updateOne(
 			{ id: userId },
 			{
 				$set: updateData,

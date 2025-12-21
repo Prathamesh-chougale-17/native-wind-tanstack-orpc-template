@@ -2,7 +2,7 @@ import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useThemeColor } from "heroui-native";
 import { authClient } from "@/lib/auth-client";
-import { orpcClient } from "@/utils/orpc";
+import { client as orpcClient } from "@/utils/orpc";
 import { useQuery } from "@tanstack/react-query";
 
 export default function TabLayout() {
@@ -60,7 +60,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="business" size={size} color={color} />
           ),
-          href: isOrg || isAdmin ? "/(tabs)/organization" : null,
+          href: (isOrg || isAdmin ? "/(tabs)/organization" : null) as any,
         }}
       />
 
@@ -71,7 +71,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="settings" size={size} color={color} />
           ),
-          href: isAdmin ? "/(tabs)/admin" : null,
+          href: (isAdmin ? "/(tabs)/admin" : null) as any,
         }}
       />
 

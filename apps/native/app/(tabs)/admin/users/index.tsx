@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { useThemeColor } from "heroui-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Container } from "@/components/container";
-import { orpcClient, queryClient } from "@/utils/orpc";
+import { client as orpcClient, queryClient } from "@/utils/orpc";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
@@ -193,7 +193,7 @@ export default function UsersManagementScreen() {
               {users.map((user: any, index: number) => (
                 <Pressable
                   key={user.id || index}
-                  onPress={() => router.push(`/(tabs)/admin/users/${user.id}`)}
+                  onPress={() => router.push(`/(tabs)/admin/users/${user.id}` as any)}
                   className="bg-surface rounded-2xl border border-divider overflow-hidden active:opacity-70"
                 >
                   <View className="p-4">

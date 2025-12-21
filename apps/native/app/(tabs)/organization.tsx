@@ -3,7 +3,7 @@ import { authClient } from "@/lib/auth-client";
 import { useThemeColor } from "heroui-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Container } from "@/components/container";
-import { orpcClient } from "@/utils/orpc";
+import { client as orpcClient } from "@/utils/orpc";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 

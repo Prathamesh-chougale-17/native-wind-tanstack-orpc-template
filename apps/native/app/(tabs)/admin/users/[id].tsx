@@ -3,7 +3,7 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 import { useThemeColor } from "heroui-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Container } from "@/components/container";
-import { orpcClient, queryClient } from "@/utils/orpc";
+import { client as orpcClient, queryClient } from "@/utils/orpc";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 

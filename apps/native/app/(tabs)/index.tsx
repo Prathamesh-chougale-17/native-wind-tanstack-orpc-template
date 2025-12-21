@@ -4,7 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import { useThemeColor } from "heroui-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Container } from "@/components/container";
-import { orpcClient } from "@/utils/orpc";
+import { client as orpcClient } from "@/utils/orpc";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
@@ -146,7 +146,7 @@ export default function HomeTab() {
           <View className="gap-3">
             {/* Profile */}
             <Pressable
-              onPress={() => router.push("/(tabs)/profile")}
+              onPress={() => router.push("/(tabs)/profile" as any)}
               className="bg-surface rounded-2xl p-4 border border-divider flex-row items-center active:opacity-70"
             >
               <View className="w-12 h-12 bg-accent/20 rounded-xl items-center justify-center mr-4">
@@ -166,7 +166,7 @@ export default function HomeTab() {
             {/* Organization (for org and admin) */}
             {(userRole === "org" || userRole === "admin") && (
               <Pressable
-                onPress={() => router.push("/(tabs)/organization")}
+                onPress={() => router.push("/(tabs)/organization" as any)}
                 className="bg-surface rounded-2xl p-4 border border-divider flex-row items-center active:opacity-70"
               >
                 <View className="w-12 h-12 bg-blue-500/20 rounded-xl items-center justify-center mr-4">
@@ -187,7 +187,7 @@ export default function HomeTab() {
             {/* Admin Panel (for admin only) */}
             {userRole === "admin" && (
               <Pressable
-                onPress={() => router.push("/(tabs)/admin")}
+                onPress={() => router.push("/(tabs)/admin" as any)}
                 className="bg-purple-500/10 rounded-2xl p-4 border border-purple-500/20 flex-row items-center active:opacity-70"
               >
                 <View className="w-12 h-12 bg-purple-500/20 rounded-xl items-center justify-center mr-4">
