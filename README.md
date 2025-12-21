@@ -1,16 +1,16 @@
 # Native Wind — RBAC App Template
 
-A concise, user-friendly overview of the app: what it does, the key features, the technology stacks that power it, and a simple architecture diagram.
+A concise, user-friendly overview of the app: what it does, key features, the technology stacks that power it, and a simple architecture diagram (Mermaid). This README is written for product folks, designers, and general users who want a high-level picture.
 
 ---
 
 ## What this app does (short)
 
-This template demonstrates role-based access control (RBAC) across a cross-platform app. It supports three roles:
+This template demonstrates Role-Based Access Control (RBAC) across a cross-platform app. It supports three roles:
 
 - `user` — regular user features
 - `org` — organization member (access to org data)
-- `admin` — global administrator (manage orgs and users)
+- `admin` — global administrator (manage organizations and users)
 
 The app includes a polished UI that adapts based on the signed-in user's role, an Admin panel for organization/user management, and secure authentication.
 
@@ -55,53 +55,44 @@ The app includes a polished UI that adapts based on the signed-in user's role, a
 
 ---
 
-## Simple architecture diagram (Mermaid)
-
-Below is a simplified diagram showing how the main pieces interact. If your viewer supports Mermaid (GitHub, Mermaid Live Editor, Obsidian, etc.), paste the block below into it or view this README in a Mermaid-enabled renderer.
+## Simple architecture diagram
 
 ```mermaid
 flowchart LR
+  %% Clients
   subgraph Clients["Clients"]
     Web["Web UI"]
     Mobile["Mobile (Expo)"]
   end
 
+  %% Client SDK / API
   Web -->|oRPC / HTTP| ClientSDK["oRPC Client"]
   Mobile -->|oRPC / HTTP| ClientSDK
+  ClientSDK -->|type-safe calls| Server["API Server\n(ORPC routers)"]
 
-  ClientSDK -->|type-safe calls| Server["Server (API & ORPC routers)"]
+  %% Admin UI
+  AdminUI["Admin Panel"]
+  AdminUI -->|manage users / orgs| Server
+  ClientSDK -->|user requests| AdminUI
 
-  Server --> Auth["Auth (Better-Auth sessions)"]
-  Server --> DB["MongoDB"]
-  DB --> Models["Models: User & Organization helpers"]
+  %% Server -> Auth / DB / Cache
+  Server -->|sessions / auth| Auth["Auth\n(Better-Auth)"]
+  Server -->|read / write| DB["MongoDB"]
+  DB -->|helpers| Models["Models: User & Organization helpers"]
 
-  Server -->|invalidate / refetch| Cache["TanStack Query cache"]
-  ClientSDK --> Cache
+  Server -->|invalidate / refetch| Cache["TanStack Query\ncache"]
+  ClientSDK -->|cache reads| Cache
 
-  AdminUI["Admin Panel"] -->|manage users / orgs| Server
-  ClientSDK -->|requests| AdminUI
+  %% Notes (use <br> for line breaks inside notes to stay GitHub-compatible)
+  note right of Server: Middleware enforces role checks<br>• protectedProcedure (authenticated)<br>• orgProcedure (org or admin)<br>• adminProcedure (admin only)
+  note right of Auth: Session contains<br>• userId<br>• role (user | org | admin)<br>• optional organizationId
 
-  %% Notes for clarity
-  note right of Server
-    Middleware enforces role checks:
-    - protectedProcedure (authenticated)
-    - orgProcedure (org OR admin)
-    - adminProcedure (admin only)
-  end
-
-  note right of Auth
-    Sessions contain:
-    - user id
-    - role (user | org | admin)
-    - optional organizationId
-  end
-
-  %% Optional style hints (some renderers honor these)
-  classDef clients fill:#f8fafc,stroke:#0f172a,color:#0f172a;
-  classDef server fill:#eef2ff,stroke:#3730a3,color:#0f172a;
-  classDef db fill:#ecfccb,stroke:#365314,color:#0f172a;
-  classDef auth fill:#fde68a,stroke:#92400e,color:#0f172a;
-  classDef cache fill:#fff7ed,stroke:#9a3412,color:#0f172a;
+  %% Optional styling hints (some renderers honor these)
+  classDef clients fill:#f8fafc,stroke:#0f172a;
+  classDef server fill:#eef2ff,stroke:#3730a3;
+  classDef db fill:#ecfccb,stroke:#365314;
+  classDef auth fill:#fde68a,stroke:#92400e;
+  classDef cache fill:#fff7ed,stroke:#9a3412;
 
   class Clients clients;
   class Server server;
@@ -118,12 +109,3 @@ flowchart LR
 - As `admin` you can create organizations and assign users.
 - Sign in as an `org` user to see organization-specific views and teammates.
 - As a `user` you see only personal features.
-
----
-
-If you'd like, I can produce:
-- A printable one-page PDF of this overview
-- A role-by-role walkthrough with annotated screenshots
-- A short demo script with test account examples
-
-Which would you prefer next?
