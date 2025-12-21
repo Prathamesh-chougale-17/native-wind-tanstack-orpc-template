@@ -68,7 +68,7 @@ flowchart LR
   %% Client SDK / API
   Web -->|oRPC / HTTP| ClientSDK["oRPC Client"]
   Mobile -->|oRPC / HTTP| ClientSDK
-  ClientSDK -->|type-safe calls| Server["API Server\n(ORPC routers)"]
+  ClientSDK -->|type-safe calls| Server["API Server<br/>(ORPC routers)"]
 
   %% Admin UI
   AdminUI["Admin Panel"]
@@ -76,18 +76,21 @@ flowchart LR
   ClientSDK -->|user requests| AdminUI
 
   %% Server -> Auth / DB / Cache
-  Server -->|sessions / auth| Auth["Auth\n(Better-Auth)"]
+  Server -->|sessions / auth| Auth["Auth<br/>(Better-Auth)"]
   Server -->|read / write| DB["MongoDB"]
-  DB -->|helpers| Models["Models: User & Organization helpers"]
+  DB -->|helpers| Models["Models<br/>User & Org helpers"]
 
-  Server -->|invalidate / refetch| Cache["TanStack Query\ncache"]
+  Server -->|invalidate / refetch| Cache["TanStack Query<br/>Cache"]
   ClientSDK -->|cache reads| Cache
 
-  %% Notes (use <br> for line breaks inside notes to stay GitHub-compatible)
-  note right of Server: Middleware enforces role checks<br>• protectedProcedure (authenticated)<br>• orgProcedure (org or admin)<br>• adminProcedure (admin only)
-  note right of Auth: Session contains<br>• userId<br>• role (user | org | admin)<br>• optional organizationId
+  %% Notes as nodes (GitHub compatible)
+  ServerNote["Middleware role checks<br/>- protectedProcedure<br/>- orgProcedure<br/>- adminProcedure"]
+  AuthNote["Session data<br/>- userId<br/>- role<br/>- optional organizationId"]
 
-  %% Optional styling hints (some renderers honor these)
+  Server -.-> ServerNote
+  Auth -.-> AuthNote
+
+  %% Styling
   classDef clients fill:#f8fafc,stroke:#0f172a;
   classDef server fill:#eef2ff,stroke:#3730a3;
   classDef db fill:#ecfccb,stroke:#365314;
