@@ -90,12 +90,3 @@ flowchart LR
   Server -.-> ServerNote
   Auth -.-> AuthNote
 ```
-
----
-
-## Quick demo notes (for product / design reviewers)
-
-- Ask a developer to sign you in as an `admin` user to see the Admin panel.
-- As `admin` you can create organizations and assign users.
-- Sign in as an `org` user to see organization-specific views and teammates.
-- As a `user` you see only personal features.
