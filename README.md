@@ -89,19 +89,6 @@ flowchart LR
 
   Server -.-> ServerNote
   Auth -.-> AuthNote
-
-  %% Styling
-  classDef clients fill:#f8fafc,stroke:#0f172a;
-  classDef server fill:#eef2ff,stroke:#3730a3;
-  classDef db fill:#ecfccb,stroke:#365314;
-  classDef auth fill:#fde68a,stroke:#92400e;
-  classDef cache fill:#fff7ed,stroke:#9a3412;
-
-  class Clients clients;
-  class Server server;
-  class DB db;
-  class Auth auth;
-  class Cache cache;
 ```
 
 ---
