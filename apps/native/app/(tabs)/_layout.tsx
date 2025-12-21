@@ -75,6 +75,14 @@ export default function TabLayout() {
         }}
       />
 
+      {/* Hide admin-panel index from tab bar (only show main admin-panel) */}
+      <Tabs.Screen
+        name="admin-panel/index"
+        options={{
+          href: null,
+        }}
+      />
+
       <Tabs.Screen
         name="profile"
         options={{
@@ -82,6 +90,32 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person" size={size} color={color} />
           ),
+        }}
+      />
+
+      {/* Hide all admin-panel nested routes from tab bar */}
+      <Tabs.Screen
+        name="admin-panel/organizations/index"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="admin-panel/organizations/create"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="admin-panel/users/index"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="admin-panel/users/[id]"
+        options={{
+          href: null,
         }}
       />
     </Tabs>
