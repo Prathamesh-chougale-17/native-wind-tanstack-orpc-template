@@ -1,10 +1,10 @@
 # Native Wind — RBAC App Template
 
-A concise, user-friendly overview of the app: what it does, key features, the technology stacks that power it, and a simple architecture diagram (Mermaid). This README is written for product folks, designers, and general users who want a high-level picture.
+A cross-platform app template demonstrating Role-Based Access Control (RBAC) using Expo (React Native), React, TanStack Query, ORPC, Better-Auth, and MongoDB.
 
 ---
 
-## What this app does (short)
+## What this app does 
 
 This template demonstrates Role-Based Access Control (RBAC) across a cross-platform app. It supports three roles:
 
@@ -16,8 +16,7 @@ The app includes a polished UI that adapts based on the signed-in user's role, a
 
 ---
 
-## Key features (for non-technical audiences)
-
+## Key features
 - Role-aware navigation: users only see screens and actions allowed for their role.
 - Organization management: admins can create and edit organizations and assign users to them.
 - User management: admins can view all users and change roles.
@@ -26,7 +25,7 @@ The app includes a polished UI that adapts based on the signed-in user's role, a
 
 ---
 
-## Technology stack (short)
+## Technology stack
 
 - Frontend: Expo (React Native) for mobile; React for web  
 - Data fetching & caching: TanStack Query (React Query) on the client  
@@ -37,7 +36,7 @@ The app includes a polished UI that adapts based on the signed-in user's role, a
 
 ---
 
-## Roles and what they can do (user-friendly)
+## Roles and what they can do
 
 - user
   - Default role for most users.
