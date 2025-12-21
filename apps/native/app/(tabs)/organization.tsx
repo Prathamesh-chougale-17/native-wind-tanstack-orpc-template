@@ -1,4 +1,5 @@
 import { View, Text, ScrollView, RefreshControl, Pressable } from "react-native";
+import { useRouter } from "expo-router";
 import { authClient } from "@/lib/auth-client";
 import { useThemeColor } from "heroui-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -8,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 export default function OrganizationTab() {
+  const router = useRouter();
   const { data: session } = authClient.useSession();
   const [refreshing, setRefreshing] = useState(false);
 
@@ -15,6 +17,7 @@ export default function OrganizationTab() {
   const accentColor = useThemeColor("accent");
   const mutedColor = useThemeColor("muted");
   const successColor = useThemeColor("success");
+  const backgroundColor = useThemeColor("background");
 
   // Fetch user profile to get organization
   const { data: profileData, refetch: refetchProfile } = useQuery({
@@ -23,11 +26,11 @@ export default function OrganizationTab() {
     enabled: !!session?.user,
   });
 
-  // Fetch organization members
+  // Fetch organization members - only if user has an organization
   const { data: membersData, refetch: refetchMembers } = useQuery({
     queryKey: ["organization-members"],
     queryFn: () => orpcClient.user.getOrganizationMembers(),
-    enabled: !!session?.user && (profileData?.user?.role === "org" || profileData?.user?.role === "admin"),
+    enabled: !!session?.user && !!profileData?.user?.organizationId && (profileData?.user?.role === "org" || profileData?.user?.role === "admin"),
   });
 
   const organization = profileData?.organization;
@@ -62,6 +65,8 @@ export default function OrganizationTab() {
   };
 
   if (!organization) {
+    const isAdmin = profileData?.user?.role === "admin";
+
     return (
       <Container showHeader={true}>
         <View className="flex-1 items-center justify-center px-6">
@@ -69,11 +74,39 @@ export default function OrganizationTab() {
             <Ionicons name="business-outline" size={40} color={mutedColor} />
           </View>
           <Text className="text-2xl font-bold text-foreground mb-2 text-center">
-            No Organization
+            No Organization Assigned
           </Text>
-          <Text className="text-muted text-center text-base">
-            You are not assigned to any organization yet.
+          <Text className="text-muted text-center text-base mb-6">
+            {isAdmin
+              ? "As an admin, you can manage all organizations. Create one and assign yourself to test organization features."
+              : "You are not assigned to any organization yet. Contact an admin to be added."}
           </Text>
+          {isAdmin && (
+            <View className="gap-3 w-full px-6">
+              <Pressable
+                onPress={() => router.push("/(tabs)/admin-panel/organizations/create" as any)}
+                className="bg-accent rounded-xl px-6 py-3 active:opacity-90"
+              >
+                <View className="flex-row items-center justify-center">
+                  <Ionicons name="add-circle" size={20} color={backgroundColor} style={{ marginRight: 8 }} />
+                  <Text className="text-background font-semibold">
+                    Create Organization
+                  </Text>
+                </View>
+              </Pressable>
+              <Pressable
+                onPress={() => router.push("/(tabs)/admin-panel" as any)}
+                className="bg-surface border border-divider rounded-xl px-6 py-3 active:opacity-70"
+              >
+                <View className="flex-row items-center justify-center">
+                  <Ionicons name="settings" size={20} color={foregroundColor} style={{ marginRight: 8 }} />
+                  <Text className="text-foreground font-semibold">
+                    Go to Admin Panel
+                  </Text>
+                </View>
+              </Pressable>
+            </View>
+          )}
         </View>
       </Container>
     );

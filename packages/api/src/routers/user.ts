@@ -98,7 +98,7 @@ export const userRouter = {
 
 		return {
 			members: members.map((member: any) => ({
-				id: member.id,
+				id: member.id || member._id?.toString() || member._id,
 				name: member.name,
 				email: member.email,
 				role: member.role || "user",

@@ -22,13 +22,13 @@ export const userHelpers = {
 		let user = null;
 
 		// 1. Try as string _id
-		user = await collection.findOne({ _id: userId });
+		user = await collection.findOne({ _id: userId } as any);
 
 		// 2. Try as ObjectId
 		if (!user) {
 			try {
 				const objectId = new mongoose.Types.ObjectId(userId);
-				user = await collection.findOne({ _id: objectId });
+				user = await collection.findOne({ _id: objectId } as any);
 			} catch (e) {
 				// Invalid ObjectId format, continue
 			}
@@ -36,7 +36,7 @@ export const userHelpers = {
 
 		// 3. Try with id field (string)
 		if (!user) {
-			user = await collection.findOne({ id: userId });
+			user = await collection.findOne({ id: userId } as any);
 		}
 
 		return user;

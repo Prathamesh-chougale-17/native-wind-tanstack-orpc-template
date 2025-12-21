@@ -98,7 +98,7 @@ export const adminRouter = {
 			);
 			return {
 				users: users.map((user: any) => ({
-					id: user.id,
+					id: user.id || user._id?.toString() || user._id,
 					name: user.name,
 					email: user.email,
 					role: user.role || "user",
@@ -112,7 +112,7 @@ export const adminRouter = {
 		const users = await userHelpers.getAllUsers();
 		return {
 			users: users.map((user: any) => ({
-				id: user.id,
+				id: user.id || user._id?.toString() || user._id,
 				name: user.name,
 				email: user.email,
 				role: user.role || "user",
