@@ -110,6 +110,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="admin-panel/organizations/[id]"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
         name="admin-panel/users/index"
         options={{
           href: null,
