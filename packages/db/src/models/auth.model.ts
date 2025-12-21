@@ -11,6 +11,8 @@ const userSchema = new Schema(
 		image: { type: String },
 		createdAt: { type: Date, required: true },
 		updatedAt: { type: Date, required: true },
+		role: { type: String, default: "user" },
+		organizationId: { type: String },
 	},
 	{ collection: "user" },
 );

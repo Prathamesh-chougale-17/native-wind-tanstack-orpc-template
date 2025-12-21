@@ -14,10 +14,13 @@ export default function TabLayout() {
   const { data: session } = authClient.useSession();
 
   // Get user profile with role
-  const { data: profileData } = useQuery({
+  const { data: profileData, refetch } = useQuery({
     queryKey: ["user-profile"],
     queryFn: () => orpcClient.user.getProfile(),
     enabled: !!session?.user,
+    staleTime: 0, // Always fetch fresh data
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 
   const userRole = profileData?.user?.role || "user";

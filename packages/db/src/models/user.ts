@@ -1,4 +1,5 @@
 import { client } from "../index";
+import mongoose from "mongoose";
 
 export type UserRole = "user" | "org" | "admin";
 
@@ -16,13 +17,45 @@ export interface UserWithRole {
 export const userHelpers = {
 	async getUserById(userId: string): Promise<any> {
 		const collection = client.collection("user");
-		return collection.findOne({ id: userId });
+
+		// Try multiple query strategies
+		let user = null;
+
+		// 1. Try as string _id
+		user = await collection.findOne({ _id: userId });
+
+		// 2. Try as ObjectId
+		if (!user) {
+			try {
+				const objectId = new mongoose.Types.ObjectId(userId);
+				user = await collection.findOne({ _id: objectId });
+			} catch (e) {
+				// Invalid ObjectId format, continue
+			}
+		}
+
+		// 3. Try with id field (string)
+		if (!user) {
+			user = await collection.findOne({ id: userId });
+		}
+
+		return user;
 	},
 
 	async updateUserRole(userId: string, role: UserRole): Promise<boolean> {
 		const collection = client.collection("user");
+
+		// Try to convert to ObjectId if valid format
+		let query: any = { id: userId };
+		try {
+			const objectId = new mongoose.Types.ObjectId(userId);
+			query = { $or: [{ _id: objectId }, { _id: userId }, { id: userId }] };
+		} catch (e) {
+			query = { $or: [{ _id: userId }, { id: userId }] };
+		}
+
 		const result = await collection.updateOne(
-			{ id: userId },
+			query,
 			{
 				$set: {
 					role,
@@ -35,8 +68,18 @@ export const userHelpers = {
 
 	async assignUserToOrganization(userId: string, organizationId: string): Promise<boolean> {
 		const collection = client.collection("user");
+
+		// Try to convert to ObjectId if valid format
+		let query: any = { id: userId };
+		try {
+			const objectId = new mongoose.Types.ObjectId(userId);
+			query = { $or: [{ _id: objectId }, { _id: userId }, { id: userId }] };
+		} catch (e) {
+			query = { $or: [{ _id: userId }, { id: userId }] };
+		}
+
 		const result = await collection.updateOne(
-			{ id: userId },
+			query,
 			{
 				$set: {
 					organizationId,
@@ -49,8 +92,18 @@ export const userHelpers = {
 
 	async removeUserFromOrganization(userId: string): Promise<boolean> {
 		const collection = client.collection("user");
+
+		// Try to convert to ObjectId if valid format
+		let query: any = { id: userId };
+		try {
+			const objectId = new mongoose.Types.ObjectId(userId);
+			query = { $or: [{ _id: objectId }, { _id: userId }, { id: userId }] };
+		} catch (e) {
+			query = { $or: [{ _id: userId }, { id: userId }] };
+		}
+
 		const result = await collection.updateOne(
-			{ id: userId },
+			query,
 			{
 				$set: {
 					organizationId: null,
@@ -87,8 +140,17 @@ export const userHelpers = {
 			updateData.organizationId = organizationId;
 		}
 
+		// Try to convert to ObjectId if valid format
+		let query: any = { id: userId };
+		try {
+			const objectId = new mongoose.Types.ObjectId(userId);
+			query = { $or: [{ _id: objectId }, { _id: userId }, { id: userId }] };
+		} catch (e) {
+			query = { $or: [{ _id: userId }, { id: userId }] };
+		}
+
 		const result = await collection.updateOne(
-			{ id: userId },
+			query,
 			{
 				$set: updateData,
 			}

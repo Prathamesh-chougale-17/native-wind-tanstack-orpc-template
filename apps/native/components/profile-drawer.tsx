@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { authClient } from "@/lib/auth-client";
+import { queryClient } from "@/utils/orpc";
 import { useThemeColor } from "heroui-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
@@ -43,7 +44,12 @@ export function ProfileDrawer({ visible, onClose }: ProfileDrawerProps) {
 
   const handleSignOut = async () => {
     setSignOutConfirm(false);
+    onClose();
     await authClient.signOut();
+    // Clear all queries
+    queryClient.clear();
+    // Redirect to sign in page
+    router.replace("/(auth)/sign-in");
   };
 
   const handleViewProfile = () => {

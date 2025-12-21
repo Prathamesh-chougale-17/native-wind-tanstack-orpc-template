@@ -16,12 +16,22 @@ export const auth = betterAuth({
 				required: false,
 				defaultValue: "user",
 				input: false,
+				returned: true,
 			},
 			organizationId: {
 				type: "string",
 				required: false,
 				input: false,
+				returned: true,
 			},
+		},
+	},
+	session: {
+		expiresIn: 60 * 60 * 24 * 7, // 7 days
+		updateAge: 60 * 60 * 24, // 1 day
+		cookieCache: {
+			enabled: true,
+			maxAge: 5 * 60, // 5 minutes
 		},
 	},
 	advanced: {

@@ -24,6 +24,9 @@ export default function HomeTab() {
     queryKey: ["user-profile"],
     queryFn: () => orpcClient.user.getProfile(),
     enabled: !!session?.user,
+    staleTime: 0, // Always fetch fresh data
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 
   const userRole = profileData?.user?.role || "user";
