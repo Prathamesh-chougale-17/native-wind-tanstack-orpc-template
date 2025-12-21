@@ -98,7 +98,7 @@ export default function HomeTab() {
           >
             <View className="w-12 h-12 bg-white/10 rounded-xl items-center justify-center mr-3">
               <Ionicons
-                name={getRoleIcon(userRole) as any}
+                name={getRoleIcon(userRole)}
                 size={24}
                 color={getRoleTextColor(userRole)}
               />
@@ -146,7 +146,7 @@ export default function HomeTab() {
           <View className="gap-3">
             {/* Profile */}
             <Pressable
-              onPress={() => router.push("/(tabs)/profile" as any)}
+              onPress={() => router.push("/(tabs)/profile")}
               className="bg-surface rounded-2xl p-4 border border-divider flex-row items-center active:opacity-70"
             >
               <View className="w-12 h-12 bg-accent/20 rounded-xl items-center justify-center mr-4">
@@ -166,7 +166,7 @@ export default function HomeTab() {
             {/* Organization (for org and admin) */}
             {(userRole === "org" || userRole === "admin") && (
               <Pressable
-                onPress={() => router.push("/(tabs)/organization" as any)}
+                onPress={() => router.push("/(tabs)/organization")}
                 className="bg-surface rounded-2xl p-4 border border-divider flex-row items-center active:opacity-70"
               >
                 <View className="w-12 h-12 bg-blue-500/20 rounded-xl items-center justify-center mr-4">
@@ -187,7 +187,7 @@ export default function HomeTab() {
             {/* Admin Panel (for admin only) */}
             {userRole === "admin" && (
               <Pressable
-                onPress={() => router.push("/(tabs)/admin" as any)}
+                onPress={() => router.push("/(tabs)/admin-panel" as any)}
                 className="bg-purple-500/10 rounded-2xl p-4 border border-purple-500/20 flex-row items-center active:opacity-70"
               >
                 <View className="w-12 h-12 bg-purple-500/20 rounded-xl items-center justify-center mr-4">
@@ -280,7 +280,7 @@ export default function HomeTab() {
               <Text className="text-xs text-muted mt-2 mb-1">Member Since</Text>
               <Text className="text-sm font-bold text-foreground">
                 {session?.user?.createdAt
-                  ? new Date(session.user.createdAt as any).toLocaleDateString(
+                  ? new Date(session.user.createdAt).toLocaleDateString(
                       "en-US",
                       { month: "short", year: "numeric" }
                     )
@@ -290,7 +290,7 @@ export default function HomeTab() {
 
             <View className="flex-1 bg-surface rounded-2xl p-4 border border-divider items-center">
               <Ionicons
-                name={getRoleIcon(userRole) as any}
+                name={getRoleIcon(userRole)}
                 size={28}
                 color={getRoleTextColor(userRole)}
               />

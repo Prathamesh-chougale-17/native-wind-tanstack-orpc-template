@@ -13,7 +13,7 @@ export default function RootIndex() {
     if (!isPending) {
       if (session) {
         // Redirect authenticated users to tabs
-        router.replace("/(tabs)" as any);
+        router.replace("/(tabs)");
       } else {
         // Redirect unauthenticated users to sign in
         router.replace("/(auth)/sign-in");

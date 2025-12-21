@@ -65,13 +65,13 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="admin"
+        name="admin-panel"
         options={{
           title: "Admin",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="settings" size={size} color={color} />
           ),
-          href: (isAdmin ? "/(tabs)/admin" : null) as any,
+          href: (isAdmin ? "/(tabs)/admin-panel" : null) as any,
         }}
       />
 

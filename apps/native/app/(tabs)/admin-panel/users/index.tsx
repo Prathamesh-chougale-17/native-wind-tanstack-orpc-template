@@ -193,7 +193,7 @@ export default function UsersManagementScreen() {
               {users.map((user: any, index: number) => (
                 <Pressable
                   key={user.id || index}
-                  onPress={() => router.push(`/(tabs)/admin/users/${user.id}` as any)}
+                  onPress={() => router.push(`/(tabs)/admin-panel/users/${user.id}` as any)}
                   className="bg-surface rounded-2xl border border-divider overflow-hidden active:opacity-70"
                 >
                   <View className="p-4">

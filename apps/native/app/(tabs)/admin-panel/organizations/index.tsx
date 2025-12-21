@@ -77,7 +77,7 @@ export default function OrganizationsScreen() {
             </Pressable>
 
             <Pressable
-              onPress={() => router.push("/(tabs)/admin/organizations/create" as any)}
+              onPress={() => router.push("/(tabs)/admin-panel/organizations/create" as any)}
               className="bg-accent rounded-xl px-4 py-2 flex-row items-center active:opacity-90"
             >
               <Ionicons name="add" size={20} color="#fff" style={{ marginRight: 4 }} />
@@ -130,7 +130,7 @@ export default function OrganizationsScreen() {
                 Get started by creating your first organization
               </Text>
               <Pressable
-                onPress={() => router.push("/(tabs)/admin/organizations/create" as any)}
+                onPress={() => router.push("/(tabs)/admin-panel/organizations/create" as any)}
                 className="bg-accent rounded-xl px-6 py-3 active:opacity-90"
               >
                 <Text className="text-background font-semibold">
@@ -185,7 +185,7 @@ export default function OrganizationsScreen() {
                     {/* Actions */}
                     <View className="flex-row gap-2">
                       <Pressable
-                        onPress={() => router.push(`/(tabs)/admin/organizations/${org.id}` as any)}
+                        onPress={() => router.push(`/(tabs)/admin-panel/organizations/${org.id}` as any)}
                         className="flex-1 bg-accent/10 rounded-xl py-3 flex-row items-center justify-center active:opacity-70"
                       >
                         <Ionicons name="eye" size={18} color={accentColor} style={{ marginRight: 6 }} />
