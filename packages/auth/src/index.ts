@@ -9,6 +9,21 @@ export const auth = betterAuth({
 	emailAndPassword: {
 		enabled: true,
 	},
+	user: {
+		additionalFields: {
+			role: {
+				type: "string",
+				required: false,
+				defaultValue: "user",
+				input: false,
+			},
+			organizationId: {
+				type: "string",
+				required: false,
+				input: false,
+			},
+		},
+	},
 	advanced: {
 		defaultCookieAttributes: {
 			sameSite: "none",
@@ -16,5 +31,8 @@ export const auth = betterAuth({
 			httpOnly: true,
 		},
 	},
-  plugins: [expo()]
+	plugins: [expo()],
 });
+
+export type Session = typeof auth.$Infer.Session;
+export type User = typeof auth.$Infer.User;
